@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capstone: Twilight Imperium Archives</title>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+
+        <header class="head">
+
+            <p>random welcome text or some cool thing</p>
+
+            <h1>Galactic Archives</h1>
+
+            <nav class="nav">
+
+                <a href="https://shop.asmodee.com/fantasy-flight-games/twilight-imperium/twilight-imperium-5-4th-edition-ti07">Get Game</a>
+
+                <a href="https://boardgamegeek.com/boardgame/233078/twilight-imperium-fourth-edition">Other Archives</a>
+
+            </nav>
+            
+        </header>
+
+        <section class="activation-toolbar">
+
+            <button id="archive-activation-button" class="activation-button">Inscribe Your Battle</button>
+
+            <button id="dice-roller-activation" class="activation-button">Roll For Initiative</button>
+
+            <button id="random-generator-button" class="activation-button">Generate Pre Game</button>
+
+        </section>
+
+        <section class="form-section">
+
+        <form class="archive-form" >
+
+            <input type="text" placeholder="Game Title" id="game-title">
+
+            <input type="text" placeholder="Length" id="length">
+
+            <select name="players" id="player-num-select" >
+                
+                <option value="3" id="play-3">3 Players</option>
+                <option value="4" id="play-4">4 Players</option>
+                <option value="5" id="play-5">5 Players</option>
+                <option value="6" id="play-6">6 Players</option>
+                <option value="7" id="play-7">7 Players</option>
+                <option value="8" id="play-8">8 Players</option>
+                
+            </select>
+
+            <input type="text" placeholder="Races, up to 8" id="races">
+
+            <input type="text" placeholder="Victor" id="victor">
+
+            <p>Inscribe your Battle</p>
+
+            <div>
+                <textarea name="" id="text-area" cols="30" rows="10"></textarea>
+            </div>
+
+            <button class="archive-button">Archive For The Ages</button>
+
+
+        </form>
+
+        <section class="dice-roller">
+
+            <span id="dice-roller-display">Initiative:</span>
+
+            <button id="dice-roller-button">Roll For Initiative</button>
+
+        </section>
+
+        <form class="random-generator" id="random-gen">
+
+            <input type="text" placeholder="How many players?" id="random-num-players">
+
+            <button id="gen-btn">Generate Pre Battle</button>
+
+        </form>
+
+    </section>
+
+    <main class="main card-container">
+
+        <div class="archive-card">
+            <!-- <img src="" alt="" > make sure to go and add image and make sure it fits -->
+            <h5 class="archive-info">Game Title: The Great Betrayel</h5>
+            <h5 class="archive-info">Game Length: 10 Hours</h5>
+            <h5 class="archive-info">Amount Of Players: 6</h5>
+            <h5 class="archive-info">Races: Hacaan, Xxcha, Sol, Vul-Wraith, Nekro-Virus, Mahacht</h5>
+            <h5 class="archive-info">Victor: Sam</h5>
+            <p class="archive-info">We came, conqured and ruled.</p>
+        </div>
+
+    </main>
+
+
+
+    <script src="index.js"></script>
+
+
+</body>
+</html>
