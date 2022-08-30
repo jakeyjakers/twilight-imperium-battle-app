@@ -35,7 +35,7 @@ const textArea = document.getElementById('text-area')
 
 const archiveBtn = document.querySelector(".archive-button")
 
-/////////Archive form///////////////////////
+/////////Archive form////////////////////////////////////
 
 ////////////////random game generator form///////////////
 
@@ -131,7 +131,55 @@ const clearFormRandomGenerator = () =>{
 
 //////////////////////////////////////////////////////////////
 
-const createCard = (event) =>{
+/////////////axios and form submit functions////////////////
+
+const creatArchive = ((body) => {
+    axios.post('http://localhost:4004/api/archives', body)
+
+    .then((response) => {
+        let {id,
+            Title,
+            Length,
+            PlayerAmount,
+            Races,
+            Victor,
+            Paragraph
+            } = response.data
+        
+        archiveCard.classList.add('archive-card')
+        const archiveCard = document.createElement('div')
+        const archiveTitle = document.createElement('h5')
+        const archiveLength = document.createElement('h5')
+        const archivePlayerAmount = document.createElement('h5')  ////in final draft look at adding loop to add classes for shorter code///
+        const archiveRaces = document.createElement('h5')
+        const archiveVictor = document.createElement('h5')
+        const archiveParagraph = document.createElement('p')
+
+//////////////////////////// had to stop due to class starting, was working on putting the vaules from the ////
+////////////////////////   returned data object into the card values/////////////////
+        archiveTitle.textContent = `Game Title: ${gameTitle.value}.`.trim()
+        archiveLength.textContent = `Game Length: ${length.value}`.trim()
+        archivePlayerAmount.textContent = `Amount Of Players: ${(playerNumText)}`
+        archiveRaces.textContent = `Races: ${races.value}`.trim()
+        archiveVictor.textContent = `Victor ${victor.value}`
+        archiveParagraph.textContent = textArea.value
+
+        archiveCard.appendChild(archiveTitle)
+        archiveCard.appendChild(archiveLength)
+        archiveCard.appendChild(archivePlayerAmount)
+        archiveCard.appendChild(archiveRaces)
+        archiveCard.appendChild(archiveVictor)
+        archiveCard.appendChild(archiveParagraph)
+        cardContainer.appendChild(archiveCard)
+        
+
+    })
+    .catch((error) => {
+        console.log(error)
+    })
+})
+
+const submitArchiveForm = (event) =>{
     event.preventDefault()
     ///logic to check if form is even filled out///
 
@@ -139,36 +187,37 @@ const createCard = (event) =>{
     
     let bodyObj = {
 
-        archiveTitle: gameTitle.value.trim(),
-        archiveLength: length.value.time(),
-        archivePlayerAmount: playerNumText,
-        archiveRaces: races.value.trim(),
-        archiveVictor: victor.value.trim(),
-        archiveParagraph: textArea.value,
+        Title: gameTitle.value.trim(),
+        Length: length.value.time(),
+        PlayerAmount: playerNumText,
+        Races: races.value.trim(),
+        Victor: victor.value.trim(),
+        Paragraph: textArea.value,
     }
 
-    axios.post('http://localhost:4004/archives', body)
+    axios.post('http://localhost:4004/api/archives', bodyObj)
     .then((res) => {
         const {archiveTitle} =res.data
         alert(`Thank you for adding ${archiveTitle} to the Galactic Archives.\n
-        May for conquests be remembered for millenia to come.`)
+        May your conquests be remembered for millenia to come.`)
 
-        getAllArchives()
+        creatArchive(bodyObj)
+
         clearFormArchive()
     })
     .catch((error) =>console.log(error))
     
     
 /////////////////////////creating elements for card/////////
-    const archiveCard = document.createElement('div')
-    // const archivePic = document.createElement('img')
-    const archiveTitle = document.createElement('h5')
-    const archiveLength = document.createElement('h5')
-    const archivePlayerAmount = document.createElement('h5')  ////in final draft look at adding loop to add classes for shorter code///
-    const archiveRaces = document.createElement('h5')
-    const archiveVictor = document.createElement('h5')
-    const archiveParagraph = document.createElement('p')
-    archiveCard.classList.add('archive-card')
+    // const archiveCard = document.createElement('div')
+    // // const archivePic = document.createElement('img')
+    // const archiveTitle = document.createElement('h5')
+    // const archiveLength = document.createElement('h5')
+    // const archivePlayerAmount = document.createElement('h5')  ////in final draft look at adding loop to add classes for shorter code///
+    // const archiveRaces = document.createElement('h5')
+    // const archiveVictor = document.createElement('h5')
+    // const archiveParagraph = document.createElement('p')
+    // archiveCard.classList.add('archive-card')
 ////////////////creating elements for card///////////////
 
 
@@ -193,6 +242,8 @@ const createCard = (event) =>{
 
     
 }
+
+getAllArchives()
 
 //////function to randomly select players form 3-8//////
 const randomGameStart = (event) =>{
@@ -258,6 +309,6 @@ const randomGameStart = (event) =>{
 
 ////function to randomly choose races based off of random players//////
 
-archiveForm.addEventListener('submit', createCard)
+archiveForm.addEventListener('submit', submitArchiveForm)
 
 randomGenerator.addEventListener('submit', randomGameStart)
