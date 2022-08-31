@@ -18,11 +18,14 @@ module.exports = {
         }
 
         archivesDB.push(newArchive)
+        console.log(newArchive)
+        console.log(archivesDB)
         res.status(200).send(archivesDB[archivesDB.length - 1])
         globalId++
     },
     
     getAllArchives: (req, res) => {
+        console.log(archivesDB)
         res.status(200).send(archivesDB)
     },
 

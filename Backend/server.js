@@ -1,6 +1,8 @@
 const express = require('express')
+
+const cors = require('cors')
+
 const app = express()
-const cors = reqire('cors')
 
 const {createArchive, getAllArchives, deleteArchive} = require('./controller.js')
 
