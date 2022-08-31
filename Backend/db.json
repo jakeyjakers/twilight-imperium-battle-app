@@ -1,12 +1,20 @@
 [
-
     {
-
+        "id": 1,
+        "Title": "Mecatol Explodes",
+        "Length": "9 Hours 37 Mitues",
+        "PlayerAmount": "6 Players",
+        "Races": "Vul-Wraith Cabal, Mahacht Gene-Sorcerors, Federation Of Sol, Embers Of Muatt, Emerates Of Hacaan, The Empyrean",
+        "Victor": "Carl",
+        "Paragraph": "The game started with the usual expansion. Several alliences were made and then broken. Muatt betrayed the Mahacht, letting the Ixthian artifact get discoverd, causing the center of the galaxy to get wiped out. After that, Muatt swooped in for the win."
     },
     {
-        
-    },
-    {
-        
-    },
+        "id": 2,
+        "Title": "Revenge of the nerds",
+        "Length": "10 Hours 16 Mitues",
+        "PlayerAmount": "8 Players",
+        "Races": "Argent Flight, Mahacht Gene-Sorcerors, Federation Of Sol, Embers Of Muatt, Emerates Of Hacaan, The Empyrean, Jol Nar, Clan of saar",
+        "Victor": "Darrel",
+        "Paragraph": "Sol, Argent Flight and Haccan were all vying for the lead. Then Jol Nal swooped in under the radar and smashed through, taking several key planets while setting up an impenitribale defense on their homesystem."
+    }
 ]

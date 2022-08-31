@@ -132,8 +132,69 @@ const clearFormRandomGenerator = () =>{
 //////////////////////////////////////////////////////////////
 
 /////////////axios and form submit functions////////////////
+const archivesCallback = ({data: archivesDB}) => displayArchives(archivesDB) ///working on this last night, tuesday///
 
-const creatArchive = ((body) => {
+const deleteArchive = ((id) =>{
+    axios.delete(`http://localhost:4004/api/archives/${id}`)
+
+    .then(archivesCallback)
+})
+.catch((error) => {
+    console.log(error)
+})
+
+const displayArchives = (arr) => {
+    for ( let i = 0; i < arr.length; i ++) {
+        createArchiveCards(arr[i])
+    }
+}
+
+const createArchiveCards = (archivesDB) => {
+
+    const archiveCard = document.createElement('div')
+    archiveCard.classList.add('archive-card')
+
+    const archiveTitle = document.createElement('h5')
+    const archiveLength = document.createElement('h5')
+    const archivePlayerAmount = document.createElement('h5')  
+    const archiveRaces = document.createElement('h5')
+    const archiveVictor = document.createElement('h5')
+    const archiveParagraph = document.createElement('p')
+    const archiveDeleteBtn = document.createElement('button').onclick = deleteArchive(`${archivesDB.id}`)
+
+
+    archiveTitle.textContent = `Game Title: ${archivesDB.Title}.`.trim()
+    archiveLength.textContent = `Game Length: ${archivesDB.Length}`.trim()
+    archivePlayerAmount.textContent = `Amount Of Players: ${(archivesDB.PlayerAmount)}`
+    archiveRaces.textContent = `Races: ${archivesDB.Races}`.trim()
+    archiveVictor.textContent = `Victor ${archivesDB.Victor}`.trim()
+    archiveDeleteBtn.textContent = `Wipe Archive`
+    archiveParagraph.textContent = `${archivesDB.Paragraph}`
+
+    
+    archiveCard.appendChild(archiveTitle)
+    archiveCard.appendChild(archiveLength)
+    archiveCard.appendChild(archivePlayerAmount)
+    archiveCard.appendChild(archiveRaces)
+    archiveCard.appendChild(archiveVictor)
+    archiveCard.appendChild(archiveDeleteBtn)
+    archiveCard.appendChild(archiveParagraph)
+    cardContainer.appendChild(archiveCard)
+
+}
+
+const getAllArchives = (() => {
+
+    axios.get('http://localhost:4004/api/archives')
+
+    .then(archivesCallback)
+    
+    .catch((error) => {
+        console.log(error)
+    })
+})
+
+const createArchive = ((body) => {
     axios.post('http://localhost:4004/api/archives', body)
 
     .then((response) => {
@@ -144,9 +205,8 @@ const creatArchive = ((body) => {
             Races,
             Victor,
             Paragraph
-            } = response.data
+            } = response.body
         
-        archiveCard.classList.add('archive-card')
         const archiveCard = document.createElement('div')
         const archiveTitle = document.createElement('h5')
         const archiveLength = document.createElement('h5')
@@ -154,21 +214,26 @@ const creatArchive = ((body) => {
         const archiveRaces = document.createElement('h5')
         const archiveVictor = document.createElement('h5')
         const archiveParagraph = document.createElement('p')
+        const archiveDeleteBtn = document.createElement('button').onclick = deleteArchive(`${id}`)
+        archiveCard.classList.add('archive-card')
 
 //////////////////////////// had to stop due to class starting, was working on putting the vaules from the ////
 ////////////////////////   returned data object into the card values/////////////////
-        archiveTitle.textContent = `Game Title: ${gameTitle.value}.`.trim()
-        archiveLength.textContent = `Game Length: ${length.value}`.trim()
-        archivePlayerAmount.textContent = `Amount Of Players: ${(playerNumText)}`
-        archiveRaces.textContent = `Races: ${races.value}`.trim()
-        archiveVictor.textContent = `Victor ${victor.value}`
-        archiveParagraph.textContent = textArea.value
+        
+        archiveTitle.textContent = `Game Title: ${Title.value}.`.trim()
+        archiveLength.textContent = `Game Length: ${Length.value}`.trim()
+        archivePlayerAmount.textContent = `Amount Of Players: ${(PlayerAmount)}`
+        archiveRaces.textContent = `Races: ${Races}`.trim()
+        archiveVictor.textContent = `Victor ${Victor}`.trim()
+        archiveDeleteBtn.textContent = `Wipe Archive`
+        archiveParagraph.textContent = `${Paragraph}`
 
         archiveCard.appendChild(archiveTitle)
         archiveCard.appendChild(archiveLength)
         archiveCard.appendChild(archivePlayerAmount)
         archiveCard.appendChild(archiveRaces)
         archiveCard.appendChild(archiveVictor)
+        archiveCard.appendChild(archiveDeleteBtn)
         archiveCard.appendChild(archiveParagraph)
         cardContainer.appendChild(archiveCard)
         
@@ -194,18 +259,18 @@ const submitArchiveForm = (event) =>{
         Victor: victor.value.trim(),
         Paragraph: textArea.value,
     }
+///////////// probaly going to have to remove this axios call, then put the alert in the other createArchive function
+    // axios.post('http://localhost:4004/api/archives', bodyObj)
+    // .then((res) => {
+    //     const {Title} =res.data
+    //     alert(`Thank you for adding ${Title} to the Galactic Archives.\n
+    //     May your conquests be remembered for millenia to come.`)
 
-    axios.post('http://localhost:4004/api/archives', bodyObj)
-    .then((res) => {
-        const {archiveTitle} =res.data
-        alert(`Thank you for adding ${archiveTitle} to the Galactic Archives.\n
-        May your conquests be remembered for millenia to come.`)
-
-        creatArchive(bodyObj)
+        createArchive(bodyObj)
 
         clearFormArchive()
-    })
-    .catch((error) =>console.log(error))
+    // })
+    // .catch((error) =>console.log(error))
     
     
 /////////////////////////creating elements for card/////////
@@ -223,22 +288,22 @@ const submitArchiveForm = (event) =>{
 
 /////////////////assigning content to variables///////////////
     // archivePic.src = pic from database or api call
-    archiveTitle.textContent = `Game Title: ${gameTitle.value}.`.trim()
-    archiveLength.textContent = `Game Length: ${length.value}`.trim()
-    archivePlayerAmount.textContent = `Amount Of Players: ${(playerNumText)}`
-    archiveRaces.textContent = `Races: ${races.value}`.trim()
-    archiveVictor.textContent = `Victor ${victor.value}`
-    archiveParagraph.textContent = textArea.value
+    // archiveTitle.textContent = `Game Title: ${gameTitle.value}.`.trim()
+    // archiveLength.textContent = `Game Length: ${length.value}`.trim()
+    // archivePlayerAmount.textContent = `Amount Of Players: ${(playerNumText)}`
+    // archiveRaces.textContent = `Races: ${races.value}`.trim()
+    // archiveVictor.textContent = `Victor ${victor.value}`
+    // archiveParagraph.textContent = textArea.value
 
 //////////////appending everthing together/////////////
-    archiveCard.appendChild(archivePic)
-    archiveCard.appendChild(archiveTitle)
-    archiveCard.appendChild(archiveLength)
-    archiveCard.appendChild(archivePlayerAmount)
-    archiveCard.appendChild(archiveRaces)
-    archiveCard.appendChild(archiveVictor)
-    archiveCard.appendChild(archiveParagraph)
-    cardContainer.appendChild(archiveCard)
+    // archiveCard.appendChild(archivePic)
+    // archiveCard.appendChild(archiveTitle)
+    // archiveCard.appendChild(archiveLength)
+    // archiveCard.appendChild(archivePlayerAmount)
+    // archiveCard.appendChild(archiveRaces)
+    // archiveCard.appendChild(archiveVictor)
+    // archiveCard.appendChild(archiveParagraph)
+    // cardContainer.appendChild(archiveCard)
 
     
 }

@@ -4,8 +4,8 @@ let globalId = 3
 
 module.exports = {
     createArchive: (req, res) =>{
-        let {archiveTitle, archiveLength, archivePlayerAmount, 
-            archiveRaces, archiveVictor, archiveParagraph}  = req.body
+        let {Title, Length, PlayerAmount, 
+            Races, Victor, Paragraph}  = req.body
 
         let newArchive = {
         id: globalId,
@@ -23,10 +23,14 @@ module.exports = {
     },
     
     getAllArchives: (req, res) => {
-
+        res.status(200).send(archivesDB)
     },
 
     deleteArchive: (req, res) => {
-
+        let index = archivesDB.findIndex((archive) => {
+            return archive.id = req.params.id
+        })
+        archivesDB.splice(index, 1)
+        res.status(200).send(archivesDB)
     },
 }

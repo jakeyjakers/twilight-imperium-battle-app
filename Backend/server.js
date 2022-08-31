@@ -11,4 +11,6 @@ app.post('/api/archives', createArchive)
 
 app.get('/api/archives', getAllArchives)
 
-app.delete('/api/archives', deleteArchive)
+app.delete('/api/archives/:id', deleteArchive)
+
+app.listen(4077, () => console.log('Running on port 4077'))
