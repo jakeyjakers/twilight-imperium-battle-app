@@ -9,7 +9,7 @@ body{
 
 .head{
     height: 15vh;
-    background-color: aqua;
+    background: rgba(171, 172, 183, 0.7);
     display: flex;
     position: relative;
     align-items: center;
@@ -26,24 +26,44 @@ body{
     margin-left: 25px;
     margin-right: 25px;
 }
-/* .activation-button{
-    
-} */
+.activation-button{
+    /* color: #841A95; */
+    min-width: 15vw;
+    min-height: 7vh;
+    margin-top: 30px;
+    font-size: large;
+    border: solid  1px;
+    border-radius: 3px;
+}
 .form-section{
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    background-color: palegreen;
-    
-    
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .archive-form{
-    display: none; 
-    width: 45vw;
-    height: 50vh;
+    width: 35vw;
+    min-height: 70vh;
     background-color: #93A8AC;
     margin: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border: solid  #841A95 2px;
+    border-radius: 2px;
+    /* display: none;  */
+}
+.archive-form button {
+    border-radius: 2px;
+    box-shadow: 2px 2px 5px;
+    min-width: 15vw;
+}
+.archive-form p {
+    font-weight: bold;
+    font-size: 18px;
 }
 #text-area{
     max-width: 30vw;
@@ -53,11 +73,20 @@ body{
 }
 
 .random-generator{
-    display: none;
-    width: 25vw;
+    width: 20vw;
     height: 25vh;
     background-color: #93A8AC;
-   
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border: solid #841A95 2px;
+    border-radius: 2px;
+}
+.random-generator button {
+    border-radius: 2px;
+    box-shadow: 2px 2px 5px;
+    min-width: 12vw;
 }
 .main{
     display: flex;
@@ -70,7 +99,7 @@ body{
     justify-content: space-evenly;
     align-items: center;
     width: 250px;
-    height: 370px;
+    height: 425px;
     background-color: #93A8AC;
     border: solid #841A95 2px;
     border-radius: 3px;
@@ -80,10 +109,24 @@ body{
 .archive-info  {
     width: 210px;
     height: 30px;
-    background-color: #4C5760;
-    border: 2px solid #94FBAB;
+    background-color: black;
+    border: 2px solid #841A95;
     font-size: 13px;
-
+    box-shadow: 4px 4px 5px;
+    /* #4C5760 */
+}
+.scroll{
+    margin: 5px;
+    padding: 5px;
+    width: 210px;
+    height: 100px;
+    background-color: black;
+    border: 2px solid #841A95;
+    font-size: 13px;
+    box-shadow: 4px 4px 5px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: justify;
 }
 .random-game-card{
     display: flex;
@@ -106,13 +149,25 @@ body{
     font-size: 13px;
 }
 .dice-roller{
-    display: none;
     min-width: 10vw;
     min-height: 15vh;
     background-color: #93A8AC;
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+    justify-content: space-evenly;
+    border: solid  #841A95 2px;
+    border-radius: 2px;
+}
+#dice-roller-button {
+    border-radius: 2px;
+    box-shadow: 2px 2px 5px;
+}
+.dice-roller span{
+    font-weight: bold;
+    font-size: large;
 }
 
+.hidden{
+    display: none;
+}

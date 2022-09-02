@@ -79,12 +79,13 @@ diceRollerBtn.addEventListener('click', diceRoller)
 const toggleDisplay = () => {
     console.log('toggle display test')
     console.log(diceRollerParent)
-    let x = diceRollerParent
-    if(x.style.display === "none") {
-        x.style.display = 'unset'
-    } else {
-        x.style.display = 'none'
-    }
+    diceRollerParent.classList.toggle('hidden')
+    // let x = diceRollerParent
+    // if(x.style.display === "none") {
+    //     x.style.display = 'unset'
+    // } else {
+    //     x.style.display = 'none'
+    // }
 };
 
 diceRollerActivationButton.addEventListener('click', toggleDisplay)
@@ -94,12 +95,13 @@ diceRollerActivationButton.addEventListener('click', toggleDisplay)
 const toggleDisplayArchive = () =>{
     console.log('toggle2 test')
     console.log(archiveForm)
-    let x = archiveForm
-    if ( x.style.display === 'none') {
-        x.style.display = 'unset'
-    } else {
-        x.style.display = 'none'
-    }
+    archiveForm.classList.toggle('hidden')
+    // let x = archiveForm
+    // if ( x.style.display === 'none') {
+    //     x.style.display = 'unset'
+    // } else {
+    //     x.style.display = 'none'
+    // }
 }
 
 archiveActivationButton.addEventListener('click', toggleDisplayArchive)
@@ -109,12 +111,13 @@ archiveActivationButton.addEventListener('click', toggleDisplayArchive)
 const toggleDislpayRandomGenerator = () => {
     console.log("toggle 3 test")
     console.log(randomGenerator)
-    let x = randomGenerator
-    if ( x.style.display === 'none') {
-        x.style.display = 'unset'
-    } else {
-        x.style.display = 'none'
-    }
+    randomGenerator.classList.toggle('hidden')
+    // let x = randomGenerator
+    // if ( x.style.display === 'none') {
+    //     x.style.display = 'unset'
+    // } else {
+    //     x.style.display = 'none'
+    // }
 }
 
 randomGeneratorActivationButton.addEventListener('click', toggleDislpayRandomGenerator)
@@ -134,7 +137,7 @@ const clearFormRandomGenerator = () =>{
 /////////////axios and form submit functions////////////////
 
 
-const archivesCallback = ({data: archivesDB}) => displayArchives(archivesDB).catch(error => console.log(error)) ///working on this last night, tuesday///
+const archivesCallback = ({data: archivesDB}) => displayArchives(archivesDB)
 
 const getAllArchives = (() => {
 
@@ -148,9 +151,12 @@ const getAllArchives = (() => {
 })
 
 
+
 const deleteArchive = ((id) =>{
     axios.delete(`http://localhost:4077/api/archives/${id}`)
-
+    console.log(id)
+    const deleteBtn = document.getElementById('delete-btn')
+    deleteBtn.parentElement.remove()
     .then(archivesCallback)
 
     .catch((error) => {
@@ -171,34 +177,45 @@ const createArchiveCards = (archivesDB) => {
     const archiveCard = document.createElement('div')
     archiveCard.classList.add('archive-card')
 
-    const archiveTitle = document.createElement('h5')
-    const archiveLength = document.createElement('h5')
-    const archivePlayerAmount = document.createElement('h5')  
-    const archiveRaces = document.createElement('h5')
-    const archiveVictor = document.createElement('h5')
-    const archiveParagraph = document.createElement('p')
-    const archiveDeleteBtn = document.createElement('button').onclick = deleteArchive(`${archivesDB.id}`)
+    archiveCard.innerHTML=`
+    <h5 class="archive-info">Game Title: ${archivesDB.Title}</h5>
+            <h5 class="archive-info">Game Length: ${archivesDB.Length}</h5>
+            <h5 class="archive-info">Amount Of Players: ${(archivesDB.PlayerAmount)}</h5>
+            <h5 class="archive-info">Races: ${archivesDB.Races}</h5>
+            <h5 class="archive-info">Victor: ${archivesDB.Victor}</h5>
+            <p class="archive-info scroll">${archivesDB.Paragraph}.</p>
+            <button id="delete-btn" onclick="deleteArchive(${archivesDB.id})">Wipe Archive</button>
+    `
+    // const archiveTitle = document.createElement('h5')
+    // const archiveLength = document.createElement('h5')
+    // const archivePlayerAmount = document.createElement('h5')  
+    // const archiveRaces = document.createElement('h5')
+    // const archiveVictor = document.createElement('h5')
+    // const archiveParagraph = document.createElement('p')
+    // const archiveDeleteBtn = document.createElement('button')
 
-
-    archiveTitle.textContent = `Game Title: ${archivesDB.Title}`
-    archiveLength.textContent = `Game Length: ${archivesDB.Length}`
-    archivePlayerAmount.textContent = `Amount Of Players: ${(archivesDB.PlayerAmount)}`
-    archiveRaces.textContent = `Races: ${archivesDB.Races}`
-    archiveVictor.textContent = `Victor ${archivesDB.Victor}`
-    archiveDeleteBtn.innerHTML = `Wipe Archive`
-    archiveParagraph.textContent = `${archivesDB.Paragraph}`
+    // archiveTitle.textContent = `Game Title: ${archivesDB.Title}`
+    // archiveLength.textContent = `Game Length: ${archivesDB.Length}`
+    // archivePlayerAmount.textContent = `Amount Of Players: ${(archivesDB.PlayerAmount)}`
+    // archiveRaces.textContent = `Races: ${archivesDB.Races}`
+    // archiveVictor.textContent = `Victor ${archivesDB.Victor}`
+    // archiveDeleteBtn.innerHTML = `Wipe Archive`
+    // archiveParagraph.textContent = `${archivesDB.Paragraph}`
 
     
-    archiveCard.appendChild(archiveTitle)
-    archiveCard.appendChild(archiveLength)
-    archiveCard.appendChild(archivePlayerAmount)
-    archiveCard.appendChild(archiveRaces)
-    archiveCard.appendChild(archiveVictor)
-    archiveCard.appendChild(archiveDeleteBtn)
-    archiveCard.appendChild(archiveParagraph)
+    // archiveCard.appendChild(archiveTitle)
+    // archiveCard.appendChild(archiveLength)
+    // archiveCard.appendChild(archivePlayerAmount)
+    // archiveCard.appendChild(archiveRaces)
+    // archiveCard.appendChild(archiveVictor)
+    // archiveCard.appendChild(archiveDeleteBtn)
+    // archiveCard.appendChild(archiveParagraph)
     cardContainer.appendChild(archiveCard)
 
+    // archiveDeleteBtn.addEventListener('click', deleteArchive)
+
 }
+
 
 
 const createArchive = ((body) => {
@@ -217,34 +234,46 @@ const createArchive = ((body) => {
         console.log(id, Title, Length, PlayerAmount, Races, Victor, Paragraph)
         
         const archiveCard = document.createElement('div')
-        const archiveTitle = document.createElement('h5')
-        const archiveLength = document.createElement('h5')
-        const archivePlayerAmount = document.createElement('h5')  ////in final draft look at adding loop to add classes for shorter code///
-        const archiveRaces = document.createElement('h5')
-        const archiveVictor = document.createElement('h5')
-        const archiveParagraph = document.createElement('p')
-        const archiveDeleteBtn = document.createElement('button') //.onclick = deleteArchive(`${id}`)
         archiveCard.classList.add('archive-card')
 
-//////////////////////////// had to stop due to class starting, was working on putting the vaules from the ////
-////////////////////////   returned data object into the card values/////////////////
+
+        archiveCard.innerHTML=`
+        <h5 class="archive-info">Game Title: ${Title}</h5>
+                <h5 class="archive-info">Game Length: ${Length}</h5>
+                <h5 class="archive-info">Amount Of Players: ${(PlayerAmount)}</h5>
+                <h5 class="archive-info">Races: ${Races}</h5>
+                <h5 class="archive-info">Victor: ${Victor}</h5>
+                <p class="archive-info scroll">${Paragraph}.</p>
+                <button id="delete-btn" onclick="deleteArchive(${id})">Wipe Archive</button>
+        `   
+//         const archiveTitle = document.createElement('h5')
+//         const archiveLength = document.createElement('h5')
+//         const archivePlayerAmount = document.createElement('h5')  ////in final draft look at adding loop to add classes for shorter code///
+//         const archiveRaces = document.createElement('h5')
+//         const archiveVictor = document.createElement('h5')
+//         const archiveParagraph = document.createElement('p')
+//         const archiveDeleteBtn = document.createElement('button') //.onclick = deleteArchive(`${id}`)
+      
+
+// //////////////////////////// had to stop due to class starting, was working on putting the vaules from the ////
+// ////////////////////////   returned data object into the card values/////////////////
         
-        archiveTitle.textContent = `Game Title: ${Title}.`
-        archiveLength.textContent = `Game Length: ${Length}`
-        archivePlayerAmount.textContent = `Amount Of Players: ${(PlayerAmount)}`
-        archiveRaces.textContent = `Races: ${Races}`
-        archiveVictor.textContent = `Victor ${Victor}`
-        archiveDeleteBtn.innerHTML = `Wipe Archive`
-        archiveParagraph.textContent = `${Paragraph}`
+//         archiveTitle.textContent = `Game Title: ${Title}.`
+//         archiveLength.textContent = `Game Length: ${Length}`
+//         archivePlayerAmount.textContent = `Amount Of Players: ${(PlayerAmount)}`
+//         archiveRaces.textContent = `Races: ${Races}`
+//         archiveVictor.textContent = `Victor ${Victor}`
+//         archiveDeleteBtn.innerHTML = `Wipe Archive`
+//         archiveParagraph.textContent = `${Paragraph}`
 
 
-        archiveCard.appendChild(archiveTitle)
-        archiveCard.appendChild(archiveLength)
-        archiveCard.appendChild(archivePlayerAmount)
-        archiveCard.appendChild(archiveRaces)
-        archiveCard.appendChild(archiveVictor)
-        archiveCard.appendChild(archiveDeleteBtn)
-        archiveCard.appendChild(archiveParagraph)
+//         archiveCard.appendChild(archiveTitle)
+//         archiveCard.appendChild(archiveLength)
+//         archiveCard.appendChild(archivePlayerAmount)
+//         archiveCard.appendChild(archiveRaces)
+//         archiveCard.appendChild(archiveVictor)
+//         archiveCard.appendChild(archiveDeleteBtn)
+//         archiveCard.appendChild(archiveParagraph)
         cardContainer.appendChild(archiveCard)
         
 

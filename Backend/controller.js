@@ -30,10 +30,12 @@ module.exports = {
     },
 
     deleteArchive: (req, res) => {
+        console.log(req.params.id)
         let index = archivesDB.findIndex((archive) => {
-            return archive.id = req.params.id
+            return archive.id === req.params.id
         })
         archivesDB.splice(index, 1)
         res.status(200).send(archivesDB)
+        console.log(archivesDB)
     },
 }
