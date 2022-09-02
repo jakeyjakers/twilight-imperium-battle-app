@@ -15,7 +15,19 @@ body{
     align-items: center;
     justify-content: space-between;
 }
-
+.head p {
+    margin-left: 20px;
+}
+.link {
+    text-decoration: none;
+    margin-right: 30px;
+    color: black;
+    font-size: large;
+}
+.link:hover {
+    color: white;
+    text-decoration: underline;
+}
 .activation-toolbar{
     height: 10vh;
     margin-top: 5px;
@@ -35,6 +47,14 @@ body{
     border: solid  1px;
     border-radius: 3px;
 }
+.activation-button:hover {
+    cursor: pointer;
+    transform:scaleY(1.1);
+    box-shadow: 5px 5px 3px black;
+}
+.activation-button:active {
+    transform: translateY(1.5px);
+}
 .form-section{
     display: flex;
     justify-content: space-evenly;
@@ -42,7 +62,6 @@ body{
     margin-top: 30px;
     margin-bottom: 30px;
 }
-
 .archive-form{
     width: 35vw;
     min-height: 70vh;
@@ -99,7 +118,7 @@ body{
     justify-content: space-evenly;
     align-items: center;
     width: 250px;
-    height: 425px;
+    height: 470px;
     background-color: #93A8AC;
     border: solid #841A95 2px;
     border-radius: 3px;
@@ -115,6 +134,14 @@ body{
     box-shadow: 4px 4px 5px;
     /* #4C5760 */
 }
+#races-box {
+    width: 210px;
+    height: 70px;
+    background-color: black;
+    border: 2px solid #841A95;
+    font-size: 13px;
+    box-shadow: 4px 4px 5px; 
+}
 .scroll{
     margin: 5px;
     padding: 5px;
@@ -129,12 +156,23 @@ body{
     text-align: justify;
 }
 .random-game-card{
+    /* display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 250px;
+    height: 425px;
+    background-color: #93A8AC;
+    border: solid #841A95 2px;
+    border-radius: 3px;
+    margin: 10px;
+    color: white; */
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
     width: 250px;
-    height: 370px;
+    height: 470px;
     background-color: #93A8AC;
     border: solid #841A95 2px;
     border-radius: 3px;
@@ -142,11 +180,17 @@ body{
     color: white;
 }
 .random-game-info {
-    width: 210px;
+    /* width: 210px;
     height: 30px;
     background-color: #4C5760;
     border: 2px solid #94FBAB;
+    font-size: 13px; */
+    width: 210px;
+    height: 30px;
+    background-color: black;
+    border: 2px solid #841A95;
     font-size: 13px;
+    box-shadow: 4px 4px 5px;
 }
 .dice-roller{
     min-width: 10vw;

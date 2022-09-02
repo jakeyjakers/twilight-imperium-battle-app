@@ -80,13 +80,8 @@ const toggleDisplay = () => {
     console.log('toggle display test')
     console.log(diceRollerParent)
     diceRollerParent.classList.toggle('hidden')
-    // let x = diceRollerParent
-    // if(x.style.display === "none") {
-    //     x.style.display = 'unset'
-    // } else {
-    //     x.style.display = 'none'
-    // }
-};
+  
+}
 
 diceRollerActivationButton.addEventListener('click', toggleDisplay)
 
@@ -96,12 +91,7 @@ const toggleDisplayArchive = () =>{
     console.log('toggle2 test')
     console.log(archiveForm)
     archiveForm.classList.toggle('hidden')
-    // let x = archiveForm
-    // if ( x.style.display === 'none') {
-    //     x.style.display = 'unset'
-    // } else {
-    //     x.style.display = 'none'
-    // }
+    
 }
 
 archiveActivationButton.addEventListener('click', toggleDisplayArchive)
@@ -112,12 +102,7 @@ const toggleDislpayRandomGenerator = () => {
     console.log("toggle 3 test")
     console.log(randomGenerator)
     randomGenerator.classList.toggle('hidden')
-    // let x = randomGenerator
-    // if ( x.style.display === 'none') {
-    //     x.style.display = 'unset'
-    // } else {
-    //     x.style.display = 'none'
-    // }
+
 }
 
 randomGeneratorActivationButton.addEventListener('click', toggleDislpayRandomGenerator)
@@ -151,22 +136,25 @@ const getAllArchives = (() => {
 })
 
 
+const deleteArchive = id => axios.delete(`http://localhost:4077/api/archives/${id}`).then(archivesCallback).catch(error => console.log(error))
 
-const deleteArchive = ((id) =>{
-    axios.delete(`http://localhost:4077/api/archives/${id}`)
-    console.log(id)
-    const deleteBtn = document.getElementById('delete-btn')
-    deleteBtn.parentElement.remove()
-    .then(archivesCallback)
+// const deleteArchive = ((id) =>{
+//     axios.delete(`http://localhost:4077/api/archives/${id}`)
+//     console.log(id)
+//     const deleteBtn = document.getElementById('delete-btn')
+//     deleteBtn.parentElement.remove()
+//     .then(archivesCallback)
 
-    .catch((error) => {
-        console.log(error)
-})
+//     .catch((error) => {
+//         console.log(error)
+// })
 
-})
+// })
 
 
 const displayArchives = (arr) => {
+    /// delete card.container.innerhtml = `` if this doesnt work//
+    cardContainer.innerHTML=``
     for ( let i = 0; i < arr.length; i ++) {
         createArchiveCards(arr[i])
     }
@@ -181,7 +169,7 @@ const createArchiveCards = (archivesDB) => {
     <h5 class="archive-info">Game Title: ${archivesDB.Title}</h5>
             <h5 class="archive-info">Game Length: ${archivesDB.Length}</h5>
             <h5 class="archive-info">Amount Of Players: ${(archivesDB.PlayerAmount)}</h5>
-            <h5 class="archive-info">Races: ${archivesDB.Races}</h5>
+            <h5 class="archive-info" id="races-box">Races: ${archivesDB.Races}</h5>
             <h5 class="archive-info">Victor: ${archivesDB.Victor}</h5>
             <p class="archive-info scroll">${archivesDB.Paragraph}.</p>
             <button id="delete-btn" onclick="deleteArchive(${archivesDB.id})">Wipe Archive</button>
@@ -241,7 +229,7 @@ const createArchive = ((body) => {
         <h5 class="archive-info">Game Title: ${Title}</h5>
                 <h5 class="archive-info">Game Length: ${Length}</h5>
                 <h5 class="archive-info">Amount Of Players: ${(PlayerAmount)}</h5>
-                <h5 class="archive-info">Races: ${Races}</h5>
+                <h5 class="archive-info" id="races-box">Races: ${Races}</h5>
                 <h5 class="archive-info">Victor: ${Victor}</h5>
                 <p class="archive-info scroll">${Paragraph}.</p>
                 <button id="delete-btn" onclick="deleteArchive(${id})">Wipe Archive</button>
