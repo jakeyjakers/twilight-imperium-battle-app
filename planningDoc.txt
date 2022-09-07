@@ -1,0 +1,27 @@
+Capstone Planning Documentation
+
+This is an application that lets you record your games for the boardgame Twilight Imperium. As well as have a few extra features, like a dice roller 
+and a random generator to help speed up game set up.
+
+Main Features
+
+Making your own custom archive
+
+Feature will include adding in a game title, game length, the amount of players-being selected with an option drop down, 
+races/factions from the game, a victor, and inputing a story about the game in a text area. 
+
+This feature will have a post, that will send all data to the backend, insert into a fake database(I will eventally add a real one sometime in the future)
+then send it back and make a card and append tothe dom. 
+It will have a get, that will automatically load the database on page load
+It will have a delete as well that will delete from the backend as well as the dom
+
+Other features include
+
+A random game generator that will take a player amount between 3-8, and randomly choose races/factions and assign them 
+to random seats at the table.
+
+A dice roller function, that will let players roll for initiative during game setup.
+
+Sub features include 
+
+links to websites about the game, and to the amanon page for it.

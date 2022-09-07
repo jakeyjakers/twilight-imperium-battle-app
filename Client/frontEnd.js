@@ -8,7 +8,6 @@ const racesArr = ['Arborec', 'Barony Of Letnav', 'Clan Of Saar', 'Embers OF Muat
 
 const playerAmountArr = [3, 4, 5, 6, 7, 8]
 
-const colors = ['Blue', 'Green', 'Yellow', 'Black', 'Orange', 'Pink', 'Purple', 'Red']
 
 //////////Grabbing all elements to be used in application///////
 
@@ -21,7 +20,7 @@ const gameTitle = document.getElementById('game-title')
 
 const length = document.getElementById('length')
 
-const playerNumSelect = document.getElementById('player-num-select')////maybe we'll have to use this, maybe not. Or just the options in it///////////
+const playerNumSelect = document.getElementById('player-num-select')
 
 const playerNumText = playerNumSelect.options[playerNumSelect.selectedIndex].text
 
@@ -44,6 +43,8 @@ const randomGenerator = document.getElementById("random-gen")
 const randNumPlayerInput = document.getElementById('random-num-players')
 
 const randGenBtn = document.getElementById('gen-btn')
+
+const randomGameCardContainer = document.getElementById('random-game-section')
 
 ////////////////random game generator form///////////////
 
@@ -121,8 +122,11 @@ const clearFormRandomGenerator = () =>{
 
 /////////////axios and form submit functions////////////////
 
+//////// acrchives callback/////////////////
 
 const archivesCallback = ({data: archivesDB}) => displayArchives(archivesDB)
+
+/////////////// get all archives ////////////////////
 
 const getAllArchives = (() => {
 
@@ -135,37 +139,33 @@ const getAllArchives = (() => {
     })
 })
 
+///////////////// delelte archives function/////////////////////
 
 const deleteArchive = id => axios.delete(`http://localhost:4077/api/archives/${id}`).then(archivesCallback).catch(error => console.log(error))
 
-// const deleteArchive = ((id) =>{
-//     axios.delete(`http://localhost:4077/api/archives/${id}`)
-//     console.log(id)
-//     const deleteBtn = document.getElementById('delete-btn')
-//     deleteBtn.parentElement.remove()
-//     .then(archivesCallback)
-
-//     .catch((error) => {
-//         console.log(error)
-// })
-
-// })
-
 
 const displayArchives = (arr) => {
-    /// delete card.container.innerhtml = `` if this doesnt work//
+
     cardContainer.innerHTML=``
+
     for ( let i = 0; i < arr.length; i ++) {
+
         createArchiveCards(arr[i])
+        
     }
 }
+
+/////////////// create archives used with the get request and archivecallback/////////////////////////
 
 const createArchiveCards = (archivesDB) => {
 
     const archiveCard = document.createElement('div')
+
     archiveCard.classList.add('archive-card')
 
-    archiveCard.innerHTML=`
+    archiveCard.innerHTML=
+    
+    `
     <h5 class="archive-info">Game Title: ${archivesDB.Title}</h5>
             <h5 class="archive-info">Game Length: ${archivesDB.Length}</h5>
             <h5 class="archive-info">Amount Of Players: ${(archivesDB.PlayerAmount)}</h5>
@@ -174,39 +174,15 @@ const createArchiveCards = (archivesDB) => {
             <p class="archive-info scroll">${archivesDB.Paragraph}.</p>
             <button id="delete-btn" onclick="deleteArchive(${archivesDB.id})">Wipe Archive</button>
     `
-    // const archiveTitle = document.createElement('h5')
-    // const archiveLength = document.createElement('h5')
-    // const archivePlayerAmount = document.createElement('h5')  
-    // const archiveRaces = document.createElement('h5')
-    // const archiveVictor = document.createElement('h5')
-    // const archiveParagraph = document.createElement('p')
-    // const archiveDeleteBtn = document.createElement('button')
-
-    // archiveTitle.textContent = `Game Title: ${archivesDB.Title}`
-    // archiveLength.textContent = `Game Length: ${archivesDB.Length}`
-    // archivePlayerAmount.textContent = `Amount Of Players: ${(archivesDB.PlayerAmount)}`
-    // archiveRaces.textContent = `Races: ${archivesDB.Races}`
-    // archiveVictor.textContent = `Victor ${archivesDB.Victor}`
-    // archiveDeleteBtn.innerHTML = `Wipe Archive`
-    // archiveParagraph.textContent = `${archivesDB.Paragraph}`
-
-    
-    // archiveCard.appendChild(archiveTitle)
-    // archiveCard.appendChild(archiveLength)
-    // archiveCard.appendChild(archivePlayerAmount)
-    // archiveCard.appendChild(archiveRaces)
-    // archiveCard.appendChild(archiveVictor)
-    // archiveCard.appendChild(archiveDeleteBtn)
-    // archiveCard.appendChild(archiveParagraph)
+   
     cardContainer.appendChild(archiveCard)
-
-    // archiveDeleteBtn.addEventListener('click', deleteArchive)
 
 }
 
-
+//////////////////// create archive -- used with the post, archive form///////////
 
 const createArchive = ((body) => {
+
     axios.post('http://localhost:4077/api/archives', body)
 
     .then((response) => {
@@ -222,10 +198,12 @@ const createArchive = ((body) => {
         console.log(id, Title, Length, PlayerAmount, Races, Victor, Paragraph)
         
         const archiveCard = document.createElement('div')
+
         archiveCard.classList.add('archive-card')
 
-
-        archiveCard.innerHTML=`
+        archiveCard.innerHTML=
+        
+        `
         <h5 class="archive-info">Game Title: ${Title}</h5>
                 <h5 class="archive-info">Game Length: ${Length}</h5>
                 <h5 class="archive-info">Amount Of Players: ${(PlayerAmount)}</h5>
@@ -234,36 +212,8 @@ const createArchive = ((body) => {
                 <p class="archive-info scroll">${Paragraph}.</p>
                 <button id="delete-btn" onclick="deleteArchive(${id})">Wipe Archive</button>
         `   
-//         const archiveTitle = document.createElement('h5')
-//         const archiveLength = document.createElement('h5')
-//         const archivePlayerAmount = document.createElement('h5')  ////in final draft look at adding loop to add classes for shorter code///
-//         const archiveRaces = document.createElement('h5')
-//         const archiveVictor = document.createElement('h5')
-//         const archiveParagraph = document.createElement('p')
-//         const archiveDeleteBtn = document.createElement('button') //.onclick = deleteArchive(`${id}`)
-      
 
-// //////////////////////////// had to stop due to class starting, was working on putting the vaules from the ////
-// ////////////////////////   returned data object into the card values/////////////////
-        
-//         archiveTitle.textContent = `Game Title: ${Title}.`
-//         archiveLength.textContent = `Game Length: ${Length}`
-//         archivePlayerAmount.textContent = `Amount Of Players: ${(PlayerAmount)}`
-//         archiveRaces.textContent = `Races: ${Races}`
-//         archiveVictor.textContent = `Victor ${Victor}`
-//         archiveDeleteBtn.innerHTML = `Wipe Archive`
-//         archiveParagraph.textContent = `${Paragraph}`
-
-
-//         archiveCard.appendChild(archiveTitle)
-//         archiveCard.appendChild(archiveLength)
-//         archiveCard.appendChild(archivePlayerAmount)
-//         archiveCard.appendChild(archiveRaces)
-//         archiveCard.appendChild(archiveVictor)
-//         archiveCard.appendChild(archiveDeleteBtn)
-//         archiveCard.appendChild(archiveParagraph)
         cardContainer.appendChild(archiveCard)
-        
 
     })
     .catch((error) => {
@@ -271,11 +221,13 @@ const createArchive = ((body) => {
     })
 })
 
+////////////////////// form submit --- for submitting the archive form /////
+
 const submitArchiveForm = (event) =>{
     event.preventDefault()
-    ///logic to check if form is even filled out///
 
-    /////////// making axios call, post, creating objec and sending it to backend/////////////
+/////////////// Here we are getting the info from the archive form, and making and object for it,
+///////////// to be sent to createArchive function, then to the backend server and databse
     
     let bodyObj = {
 
@@ -285,8 +237,8 @@ const submitArchiveForm = (event) =>{
         Races: races.value.trim(),
         Victor: victor.value.trim(),
         Paragraph: textArea.value,
-    }
 
+    }
 
         createArchive(bodyObj)
 
@@ -294,69 +246,77 @@ const submitArchiveForm = (event) =>{
 
 }
 
-
-
 //////function to randomly select players form 3-8//////
 const randomGameStart = (event) =>{
     event.preventDefault()
     console.log('test for randomdgamestart')
-    //we need to somehow take the value of the random plyer input
+
+////////////// Here we are taking the input from the from the random genrator form, and making sure it is a number//
+////////// Then we declare and empty array for info to be stored, and a seat number//////////
 
     let randomPlayerAmount = +randNumPlayerInput.value
     let playerArr = []
     let seatNumber = 1
-    //then somehow take that value and grab the races from the racesArr equivalent the randome player input
+    
+//////////// Here we are initializing a for loop, that inside of it will grab a random faction/race from an 
+///// data array, then we will insert that as well as a seat number for it, into the playerArr    
+
     for(let i = 0; i < randomPlayerAmount; i++){
         
-        //////asign colors to races///////
-        
-
         let randomlyChosenRaces = racesArr[Math.floor(Math.random()*racesArr.length)]
 
+///////// When a race gets chosen, it will get rmoved from the old data array, to insure it will not get picked a 
+///////// a second or third time for setting up the game.
 
         playerArr.push(`Slice ${seatNumber}, ${randomlyChosenRaces},`)
 
         seatNumber++
 
-        // return playerArr
+        let index = racesArr.findIndex((races) => {
+            
+        return races === randomlyChosenRaces  
+
+        })
+
+        racesArr.splice(index, 1)
 
     }
     console.log(playerArr)
-    ///loop over playerstr and split it//
+   
+///////////// Here we will create a div element, and add a css class to it
 
     const randomGameCard = document.createElement('div')
+    
     randomGameCard.classList.add('random-game-card')
+
+//////////// Here we will inititate another for loop which will loop over the new playerArr(see previous loop)
+///////////// An element will be created for each item in the arry, which will then have a css class added to it
 
     for(let i = 0; i < playerArr.length; i++){
 
-        ///during the loop each substring will be attached to a created element
         console.log(playerArr[i])
+
         let playerInfo = document.createElement('h5')
+
         playerInfo.textContent = playerArr[i]
+
         console.log(playerInfo)
-        playerInfo.classList.add('random-game-info')
-        // console.log(playerInfo)
-        // let playerInfo = document.createElement('h5').classList.add('random-game-info').textContent = playerArr[i]
-        // console.log(playerInfo)
-        // playerInfo.classList.add('random-game-info')
-
-        // randomGameCard.appendChild(document.createElement('h5').textContent = playerArr[i]).classList.add('random-game-card')
         
+        playerInfo.classList.add('random-game-info')  
 
-        ///then each element will be appended to the DOM in some fashion. maybe a card, with race pics?
+//////// Each element will now be appended to the div card
+
         randomGameCard.appendChild(playerInfo)
+        
     }
-    cardContainer.appendChild(randomGameCard)
 
-    //then assign those races to a seat number
+////////// The parent div will now be appended to the DOM
 
-    //then push them to a new variable, 
+    randomGameCardContainer.appendChild(randomGameCard)
 
-    //then append that to the DOM
     clearFormRandomGenerator()
 
 }
-
 
 ////function to randomly choose races based off of random players//////
 
