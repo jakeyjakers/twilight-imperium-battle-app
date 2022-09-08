@@ -2,6 +2,27 @@
   "dependencies": {
     "axios": "^0.27.2",
     "cors": "^2.8.5",
-    "express": "^4.18.1"
-  }
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "rollbar": "^2.25.1"
+  },
+  "name": "twilight-imperium-battle-app",
+  "version": "1.0.0",
+  "main": "Backend/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node Backend/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jakeyjakers/twilight-imperium-battle-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jakeyjakers/twilight-imperium-battle-app/issues"
+  },
+  "homepage": "https://github.com/jakeyjakers/twilight-imperium-battle-app#readme",
+  "description": ""
 }
