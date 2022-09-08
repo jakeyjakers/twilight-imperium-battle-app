@@ -130,7 +130,7 @@ const archivesCallback = ({data: archivesDB}) => displayArchives(archivesDB)
 
 const getAllArchives = (() => {
 
-    axios.get('http://localhost:4077/api/archives')
+    axios.get('/api/archives')
 
     .then(archivesCallback)
     
@@ -141,7 +141,7 @@ const getAllArchives = (() => {
 
 ///////////////// delelte archives function/////////////////////
 
-const deleteArchive = id => axios.delete(`http://localhost:4077/api/archives/${id}`).then(archivesCallback).catch(error => console.log(error))
+const deleteArchive = id => axios.delete(`/api/archives/${id}`).then(archivesCallback).catch(error => console.log(error))
 
 
 const displayArchives = (arr) => {
@@ -183,7 +183,7 @@ const createArchiveCards = (archivesDB) => {
 
 const createArchive = ((body) => {
 
-    axios.post('http://localhost:4077/api/archives', body)
+    axios.post('/api/archives', body)
 
     .then((response) => {
         let {id,
