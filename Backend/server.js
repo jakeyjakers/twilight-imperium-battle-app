@@ -8,13 +8,12 @@ const cors = require('cors')
 
 const app = express()
 
-const {createArchive, getAllArchives, deleteArchive} = require('./controller.js')
+const {createArchive, getAllArchives, deleteArchive, createUser, deleteUser} = require('./controller.js')
 
 const {ROLLBARTOKEN} = process.env
 
 app.use(express.json())
 app.use(cors())
-
 
 // include and initialize the rollbar library with your access token
 const Rollbar = require('rollbar')
@@ -50,6 +49,10 @@ app.post('/api/archives', createArchive)
 app.get('/api/archives', getAllArchives)
 
 app.delete('/api/archives/:id', deleteArchive)
+
+app.delete('/api/archives/user:id', deleteUser)
+
+app.post('/api/archives/signup', createUser)
 
 const port = process.env.PORT || 4077
 

@@ -1,5 +1,5 @@
 console.log("Test")
-let test = 'bla bla bla'
+
 //////fake database of player num and races/////////
 const racesArr = ['Arborec', 'Barony Of Letnav', 'Clan Of Saar', 'Embers OF Muatt', 'Emirates Of Haccan', 
 'Federation Of Sol', 'Ghosts Of Creus', 'The L1Z1X Mindnet', 'Mentak Coalition', 'Nallu Collective', 'Nekro Virus', 
