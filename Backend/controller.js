@@ -123,7 +123,7 @@ module.exports = {
             WHERE users.username = '${userName}', 
             `)
         .then((dbRes) =>{
-            res.status(200).send(dbRes)
+            res.status(200).send(dbRes[0])
         })
         .catch((error) =>{
             console.log(error)

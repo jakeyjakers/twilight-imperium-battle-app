@@ -32,13 +32,25 @@ app.get('/', (req, res) => {
     rollbar.log("Someone is using your page")
 })
 
+// app.get('/account', (req, res) => {
+//     res.sendFile(path.join(__dirname, "../Client/account.html"))
+// })
+
 app.get('/css', (req, res) => {
     res.sendFile(path.join(__dirname, "../Client/styles.css"))
 })
 
+// app.get('/logincss', (req, res) => {
+//     res.sendFile(path.join(__dirname, "../Client/login/styles.css"))
+// })
+
 app.get('/js', (req, res) => {
     res.sendFile(path.join(__dirname, "../Client/frontEnd.js"))
 })
+
+// app.get('/loginjs', (req, res) => {
+//     res.sendFile(path.join(__dirname, "../Client/signUpLogIn.js"))
+// })
 
 app.get('/jpeg', (req, res) => {
     res.sendFile(path.join(__dirname, "../images/1_CiFccsrrZLCb0JHrEp7zaw.jpeg"))

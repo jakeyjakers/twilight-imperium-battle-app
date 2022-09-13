@@ -24,6 +24,36 @@ const submitSignUp = (event) => {
     
 }
 
+///// create login that ties in with signup////
+const login = (event) => {
+    event.preventDefault()
+    
+    if(userName.length < 10 && password !== passwordCheck) {
+        alert(`Please enter valid information.`)
+    }
+    else {
+        let userObj = {
+            userName: userName.value,
+            password: password.value
+        }
+        axios.post('/api/archives/login', userObj) 
+        .then((response) => {
+            let {check, id} = res.data
+            if (check === true) {
+                /// maybe later use the getAllArchives() to get their info and automatically load their page
+                alert(`You are now logged in.`)
+            }
+            else {
+                alert(`The information was not correct, please check your username and password.`)
+            }
+        })
+    }
+}
+
+// const checkUser = (body) => {
+
+// }
+
 ///////// create user function used with sign up/////////////
 
 const createUser = (body) => {
